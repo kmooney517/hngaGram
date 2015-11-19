@@ -1,0 +1,38 @@
+@import "foundation";
+@import "font-awesome";
+
+
+body {
+  background: #e2ebf3;
+}
+
+.container {
+
+  width: 70%;
+  margin: 20px auto;
+}
+
+.tile{
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  img{
+    height: 100%;
+    width: 100%;
+    padding: 3%;
+  }
+}
+
+
+.heart:before {
+  content: "\f004";
+  opacity: 0.8;
+  font-family: FontAwesome;
+  color: gray;
+  font-size: 50px;
+  position: absolute;
+  bottom: 70px;
+  left: 70px;
+}
