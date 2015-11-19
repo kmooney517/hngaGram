@@ -1,6 +1,7 @@
 let HomeController = function(ImageService, $http, PARSE) {
 
-  let vm = this;  
+  let vm = this;
+
   vm.photo = getPhotos;
 
   let url = PARSE.URL + 'classes/image';
@@ -12,11 +13,7 @@ let HomeController = function(ImageService, $http, PARSE) {
       vm.photo = response.data.results;
     });
   }
-  vm.addLike = function(image) {
-    console.log(image.objectId);
-    vm.likes = vm.likes + 1;
-    return $http.put(url + '/' + image.objectId, image.likes, PARSE.CONFIG);
-  };
+
 
 };
 

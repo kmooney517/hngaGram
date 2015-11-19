@@ -4,14 +4,13 @@ let ImageService = function($http, PARSE) {
 
   this.getImages = getImages;
   this.addImage = addImage;
-  // this.addSomeLove = addSomeLove;
-
+  this.addLike = addLike;
 
 
   function Image (imageObj) {
     this.link = imageObj.link;
     this.name = imageObj.name;
-    this.like = 0;
+    this.likes = Number(imageObj.likes);
   }
 
   function addImage (imageObj) {
@@ -21,6 +20,13 @@ let ImageService = function($http, PARSE) {
 
   function getImages () {
     return $http.get(url, PARSE.CONFIG);
+  }
+
+
+  function addLike (pic) {
+    console.log(pic.objectId);
+    pic.likes = pic.likes + 1;
+    return $http.put(url + '/' + pic.objectId, pic, PARSE.CONFIG);
   }
 
 };

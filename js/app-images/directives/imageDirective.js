@@ -9,14 +9,17 @@ let imageItem = function($state, ImageService) {
       pic: '=pizza'
     },
     template: `
-      <div class="tile" ng-dblclick="vm.addLike(pic)" ng-init="vm.likes=0">
+      <div class="tile">
         <img class="picture" ng-src="{{pic.link}}">
         <small class="title">{{pic.name}} | </small>
-        <small>Likes: {{vm.likes}}</small>
+        <small>Likes: {{pic.likes}}</small>
       </div>
     `,
     controller: 'HomeController as vm',
     link: function (scope, element, attrs) {
+      element.on('click', function () {
+        ImageService.addLike(scope.pic);
+      });
       element.on('mouseenter', function () {
         element.addClass('heart');
       });

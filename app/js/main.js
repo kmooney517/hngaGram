@@ -81,6 +81,7 @@ Object.defineProperty(exports, '__esModule', {
 var HomeController = function HomeController(ImageService, $http, PARSE) {
 
   var vm = this;
+
   vm.photo = getPhotos;
 
   var url = PARSE.URL + 'classes/image';
@@ -92,11 +93,6 @@ var HomeController = function HomeController(ImageService, $http, PARSE) {
       vm.photo = response.data.results;
     });
   }
-  vm.addLike = function (image) {
-    console.log(image.objectId);
-    vm.likes = vm.likes + 1;
-    return $http.put(url + '/' + image.objectId, image.likes, PARSE.CONFIG);
-  };
 };
 
 HomeController.$inject = ['ImageService', '$http', 'PARSE'];
@@ -125,9 +121,12 @@ var imageItem = function imageItem($state, ImageService) {
     scope: {
       pic: '=pizza'
     },
-    template: '\n      <div class="tile" ng-dblclick="vm.addLike(pic)" ng-init="vm.likes=0">\n        <img class="picture" ng-src="{{pic.link}}">\n        <small class="title">{{pic.name}} | </small>\n        <small>Likes: {{vm.likes}}</small>\n      </div>\n    ',
+    template: '\n      <div class="tile">\n        <img class="picture" ng-src="{{pic.link}}">\n        <small class="title">{{pic.name}} | </small>\n        <small>Likes: {{pic.likes}}</small>\n      </div>\n    ',
     controller: 'HomeController as vm',
     link: function link(scope, element, attrs) {
+      element.on('click', function () {
+        ImageService.addLike(scope.pic);
+      });
       element.on('mouseenter', function () {
         element.addClass('heart');
       });
@@ -184,12 +183,12 @@ var ImageService = function ImageService($http, PARSE) {
 
   this.getImages = getImages;
   this.addImage = addImage;
-  // this.addSomeLove = addSomeLove;
+  this.addLike = addLike;
 
   function Image(imageObj) {
     this.link = imageObj.link;
     this.name = imageObj.name;
-    this.like = 0;
+    this.likes = Number(imageObj.likes);
   }
 
   function addImage(imageObj) {
@@ -199,6 +198,12 @@ var ImageService = function ImageService($http, PARSE) {
 
   function getImages() {
     return $http.get(url, PARSE.CONFIG);
+  }
+
+  function addLike(pic) {
+    console.log(pic.objectId);
+    pic.likes = pic.likes + 1;
+    return $http.put(url + '/' + pic.objectId, pic, PARSE.CONFIG);
   }
 };
 
