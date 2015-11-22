@@ -1,6 +1,10 @@
 ## Welcome to My Project
 
-> I am your Readme.md file, you should probably update me.
+> Link: http://flaky-oven.surge.sh/#/
+>Description:
+This project demonstrates that I can create an AngularJS project from scratch
+This project demonstrates that I have an understanding of AngularJS directives
+This project demonstrates that I can break AngularJS application into sub modules
 
 
 ## Usage
