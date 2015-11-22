@@ -1,7 +1,7 @@
 ## Welcome to My Project
 
 > Link: http://flaky-oven.surge.sh/#/
->Description:
+> Description:
 This project demonstrates that I can create an AngularJS project from scratch
 This project demonstrates that I have an understanding of AngularJS directives
 This project demonstrates that I can break AngularJS application into sub modules
